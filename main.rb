@@ -16,9 +16,9 @@ module Mastermind
       while @turn_number < 10
         update_turn!
         puts "\n------>>> TURN #{@turn_number} <<<------".pink
-        place_player_pawn(@player)
+        place_player_pawn
         update_result!
-        if player_wins?(@player)
+        if player_wins?
           puts "#{@player} win!"
           print_board
           return
@@ -34,9 +34,9 @@ module Mastermind
       nil
     end
 
-    def place_player_pawn(player)
+    def place_player_pawn
       a = 0
-      @board[0].each do |position|
+      @board[0].each do
         @board[0][a] = @player.select_position!("#{a + 1}")
         a += 1
       end
@@ -58,7 +58,7 @@ module Mastermind
       puts joint_row.join("\n\n")
     end
 
-    def player_wins?(player)
+    def player_wins?
       @board[1].all? { |pawn| pawn == ' * '.green }
     end
 
